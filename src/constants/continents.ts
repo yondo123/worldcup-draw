@@ -1,10 +1,6 @@
-type Continents = Array<{
-    name: string;
-    code: string;
-    numberOfEntries: number;
-}>;
+import {Continents} from '../types';
 
-const continent = [
+const continent: Continents = [
     {
         name: '유럽',
         code: 'uefa',

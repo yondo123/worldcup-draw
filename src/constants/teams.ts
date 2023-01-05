@@ -1,9 +1,4 @@
-type Teams = Array<{
-    name: string;
-    code: string;
-    resource: string;
-    continent: string;
-}>;
+import {Teams} from '../types';
 
 const teams: Teams = [
     {

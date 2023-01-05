@@ -1,9 +1,4 @@
-type Priority = 'first' | 'second' | 'third' | 'fourth';
-
-type Pots = Array<{
-    name: string;
-    code: Priority;
-}>;
+import {Pots} from '../types';
 
 const pots: Pots = [
     {
