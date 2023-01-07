@@ -9,11 +9,13 @@ export type Teams = Array<Team>;
 
 export type Continents = Array<{
     name: string;
-    code: string;
+    code: Continent;
     numberOfEntries: number;
 }>;
 
-type Priority = 'first' | 'second' | 'third' | 'fourth';
+export type Priority = 'first' | 'second' | 'third' | 'fourth';
+
+export type Continent = 'uefa' | 'afc' | 'caf' | 'conmebol' | 'concacaf' | 'ofc';
 
 export type Pots = Array<{
     name: string;
