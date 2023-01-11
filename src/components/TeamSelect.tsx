@@ -1,28 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import {continents, teams} from '../constants';
-import {Continent} from '../types';
+import {continents} from '../constants';
+import {Continent, Team, Teams} from '../types';
+import ButtonAddPot from './ButtonAddPot';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store';
+
 const TeamSelect = () => {
-    const [availableContinents, setAvailableContinents] = useState(continents);
+    const teams: Teams = useSelector((state: RootState) => state.teamList);
     const [continent, setContinent] = useState(continents[0].code);
-    const [availableTeams, setAvailableTeams] = useState(
-        teams.filter((item) => {
-            return item.continent === continent;
-        })
-    );
+    const [team, setTeam] = useState(teams[0]);
 
     useEffect(() => {
-        setAvailableTeams(filterAvailableTeams(continent));
-    }, [continent]);
+        const firstTeam = teams.find((team) => team.continent === continent);
+        setTeam(firstTeam || teams[0]);
+    }, [continent, teams]);
 
-    const filterAvailableTeams = (continentCode: Continent) => {
-        return teams.filter((item) => {
-            return item.continent === continentCode;
-        });
-    };
-
-    const handleChangeContiniet = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleChangeContinent = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const {value} = e.target;
         setContinent(value as Continent);
+    };
+
+    const handleChangeTeam = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const {value} = e.target;
+        const selectTeam = teams.find((item) => item.code === value);
+        setTeam(selectTeam as Team);
     };
 
     return (
@@ -31,8 +32,8 @@ const TeamSelect = () => {
                 <label htmlFor="country">
                     <strong>Continent</strong>
                 </label>
-                <select id="country" onChange={handleChangeContiniet}>
-                    {availableContinents.map((item) => {
+                <select id="country" onChange={handleChangeContinent}>
+                    {continents.map((item) => {
                         return (
                             <option key={item.code} value={item.code}>
                                 {item.name} ({item.code.toUpperCase()})
@@ -45,19 +46,19 @@ const TeamSelect = () => {
                 <label htmlFor="country">
                     <strong>Country</strong>
                 </label>
-                <select id="country">
-                    {availableTeams.map((item) => {
-                        return (
-                            <option key={item.code} value={item.code}>
-                                {item.name}
-                            </option>
-                        );
-                    })}
+                <select id="country" onChange={handleChangeTeam}>
+                    {teams
+                        .filter((team) => team.continent === continent)
+                        .map((item) => {
+                            return (
+                                <option key={item.code} value={item.code}>
+                                    {item.name}
+                                </option>
+                            );
+                        })}
                 </select>
             </div>
-            <button type="button" className="btn-add">
-                ADD
-            </button>
+            <ButtonAddPot selectedTeam={team} />
         </section>
     );
 };
