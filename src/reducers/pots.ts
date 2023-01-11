@@ -1,11 +1,23 @@
 import {ADD_TEAM_TO_POT, addTeamToPot} from '../actions/pots';
+import {Teams} from '../types';
 
 type PotsAction = ReturnType<typeof addTeamToPot>;
-
-const pots = (prevState = [], action: PotsAction) => {
+type PotsType = {
+    first: Teams;
+    second: Teams;
+    third: Teams;
+    fourth: Teams;
+};
+const initialPots: PotsType = {
+    first: [],
+    second: [],
+    third: [],
+    fourth: []
+};
+const pots = (prevState = initialPots, action: PotsAction) => {
     switch (action.type) {
         case ADD_TEAM_TO_POT:
-            return [...prevState, action.data];
+            return {...prevState, [action.data.pot]: [...prevState[action.data.pot], action.data.team]};
         default:
             return prevState;
     }
