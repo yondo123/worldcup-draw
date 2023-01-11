@@ -50,6 +50,11 @@ header h1 {
     color: white;
     padding: 10px;
     border-radius: 12px;
+
+    &:disabled {
+        background-color: $disabled;
+        cursor: not-allowed;
+    }
 }
 
 /* output buttons */
