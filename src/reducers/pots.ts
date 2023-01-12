@@ -11,7 +11,7 @@ const initialPots: PotsType = {
     currentPot: pots[0],
     teams: []
 };
-const potsReducer = (prevState = initialPots, action: PotsAction) => {
+const potReducer = (prevState = initialPots, action: PotsAction) => {
     switch (action.type) {
         case SET_POT:
             return {...prevState, currentPot: action.data};
@@ -24,4 +24,4 @@ const potsReducer = (prevState = initialPots, action: PotsAction) => {
     }
 };
 
-export default potsReducer;
+export default potReducer;

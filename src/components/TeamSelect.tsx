@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../store';
 
 const TeamSelect = () => {
-    const teams: Teams = useSelector((state: RootState) => state.teamList);
+    const teams: Teams = useSelector((state: RootState) => state.teamReducer);
     const [continent, setContinent] = useState(continents[0].code);
     const [team, setTeam] = useState(teams[0]);
 
@@ -33,10 +33,10 @@ const TeamSelect = () => {
                     <strong>Continent</strong>
                 </label>
                 <select id="country" onChange={handleChangeContinent}>
-                    {continents.map((item) => {
+                    {continents.map((continent) => {
                         return (
-                            <option key={item.code} value={item.code}>
-                                {item.name} ({item.code.toUpperCase()})
+                            <option key={continent.code} value={continent.code}>
+                                {continent.name} ({continent.code.toUpperCase()})
                             </option>
                         );
                     })}
@@ -49,16 +49,16 @@ const TeamSelect = () => {
                 <select id="country" onChange={handleChangeTeam}>
                     {teams
                         .filter((team) => team.continent === continent)
-                        .map((item) => {
+                        .map((team) => {
                             return (
-                                <option key={item.code} value={item.code}>
-                                    {item.name}
+                                <option key={team.code} value={team.code}>
+                                    {team.name}
                                 </option>
                             );
                         })}
                 </select>
             </div>
-            <ButtonAddPot selectedTeam={team} />
+            <ButtonAddPot selectedTeam={team} continent={continent} />
         </section>
     );
 };

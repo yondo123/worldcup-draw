@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
-import teamList from './reducers/teams';
-import Pots from './reducers/pots';
+import teamReducer from './reducers/teams';
+import potReducer from './reducers/pots';
+import groupReducer from './reducers/groups';
 
 const rootReducer = combineReducers({
-    teamList,
-    Pots
+    teamReducer,
+    potReducer,
+    groupReducer
 });
 
 export default rootReducer;

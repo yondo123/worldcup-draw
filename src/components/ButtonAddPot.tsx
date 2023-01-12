@@ -12,15 +12,16 @@ interface PropsType {
 }
 const ButtonAddPot = (props: PropsType) => {
     const dispatch = useDispatch();
-    const potOfTeams = useSelector((state: RootState) => state.Pots.teams);
-    const pot = useSelector((state: RootState) => state.Pots.currentPot);
+    const potOfTeams = useSelector((state: RootState) => state.potReducer.teams);
+    const pot = useSelector((state: RootState) => state.potReducer.currentPot);
     const [addCount, setAddCount] = useState(0);
 
     useEffect(() => {
+        console.log(potOfTeams);
         if (!addCount || addCount >= numberOfGroup * pots.length) {
             return;
         }
-        if (addCount && !potOfTeams.length) {
+        if (!(addCount % numberOfGroup)) {
             switch (pot.code) {
                 case pots[0].code:
                     dispatch(setPot(pots[1]));
@@ -43,6 +44,7 @@ const ButtonAddPot = (props: PropsType) => {
         dispatch(addTeamToPot(props.selectedTeam));
         setAddCount((prevCount) => ++prevCount);
     }, [props.selectedTeam]);
+
     return (
         <button type="button" className="btn-add" onClick={handleAddTeam} disabled={addCount >= 32 || potOfTeams.length === numberOfGroup}>
             ADD {pot.code.toUpperCase()} POT

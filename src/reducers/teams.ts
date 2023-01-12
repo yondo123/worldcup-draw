@@ -4,7 +4,7 @@ import {Teams} from '../types';
 
 type TeamsAction = ReturnType<typeof addTeam> | ReturnType<typeof removeTeam>;
 
-const teamList = (prevState: Teams = teams, action: TeamsAction) => {
+const teamReducer = (prevState: Teams = teams, action: TeamsAction) => {
     switch (action.type) {
         case ADD_TEAM:
             return [...prevState, action.data];
@@ -15,4 +15,4 @@ const teamList = (prevState: Teams = teams, action: TeamsAction) => {
     }
 };
 
-export default teamList;
+export default teamReducer;
