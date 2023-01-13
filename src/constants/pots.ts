@@ -2,19 +2,19 @@ import {Pots} from '../types';
 
 const pots: Pots = [
     {
-        name: '1',
+        maxOfGroupTeams: 0,
         code: 'first'
     },
     {
-        name: '2',
+        maxOfGroupTeams: 1,
         code: 'second'
     },
     {
-        name: '3',
+        maxOfGroupTeams: 2,
         code: 'third'
     },
     {
-        name: '4',
+        maxOfGroupTeams: 3,
         code: 'fourth'
     }
 ];
