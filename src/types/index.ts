@@ -2,7 +2,7 @@ export interface Team {
     name: string;
     code: string;
     resource: string;
-    continent: string;
+    continent: Continent;
 }
 export type Teams = Array<Team>;
 
