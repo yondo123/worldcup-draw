@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Select} from 'antd';
 import {continents} from '../constants';
 import {Continent, Team, Teams} from '../types';
 import ButtonAddPot from './ButtonAddPot';
@@ -16,48 +17,41 @@ const TeamSelect = () => {
         setTeam(firstTeam || teams[0]);
     }, [continent, teams]);
 
-    const handleChangeContinent = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const {value} = e.target;
-        setContinent(value as Continent);
+    const handleChangeContinent = (selectedContinent: Continent) => {
+        setContinent(selectedContinent);
     };
 
-    const handleChangeTeam = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const {value} = e.target;
-        const selectTeam = teams.find((item) => item.code === value);
+    const handleChangeTeam = (selectedTeam: string) => {
+        const selectTeam = teams.find((item) => item.code === selectedTeam);
         setTeam(selectTeam as Team);
     };
 
     return (
         <section className="filter">
             <div className="select-wrap">
-                <label htmlFor="country">
+                <label htmlFor="continent">
                     <strong>Continent</strong>
                 </label>
-                <select id="country" onChange={handleChangeContinent}>
-                    {continents.map((continent) => {
-                        return (
-                            <option key={continent.code} value={continent.code}>
-                                {continent.name} ({continent.code.toUpperCase()})
-                            </option>
-                        );
-                    })}
-                </select>
+                <Select
+                    id="continent"
+                    style={{width: 256}}
+                    defaultValue={continents[0].code}
+                    onChange={handleChangeContinent}
+                    options={continents.map((continent) => ({label: continent.name, value: continent.code}))}
+                />
             </div>
             <div className="select-wrap">
                 <label htmlFor="country">
                     <strong>Country</strong>
                 </label>
-                <select id="country" onChange={handleChangeTeam} disabled={continentLimit[continent] < 1}>
-                    {teams
-                        .filter((team) => team.continent === continent)
-                        .map((team) => {
-                            return (
-                                <option key={team.code} value={team.code}>
-                                    {team.name}
-                                </option>
-                            );
-                        })}
-                </select>
+                <Select
+                    id="country"
+                    style={{width: 256}}
+                    disabled={continentLimit[continent] < 1}
+                    value={team.name}
+                    onChange={handleChangeTeam}
+                    options={teams.filter((team) => team.continent === continent).map((team) => ({label: team.name, value: team.code}))}
+                />
             </div>
             <ButtonAddPot selectedTeam={team} continent={continent} />
         </section>

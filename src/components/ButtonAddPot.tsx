@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../store';
 import {addTeamToPot, setPot} from '../actions/pots';
 import {numberOfGroup, pots} from '../constants';
+import {Button} from 'antd';
 
 interface PropsType {
     selectedTeam: Team;
@@ -46,9 +47,9 @@ const ButtonAddPot = (props: PropsType) => {
     }, [props.selectedTeam]);
 
     return (
-        <button type="button" className="btn-add" onClick={handleAddTeam} disabled={addCount >= 32 || potOfTeams.length === numberOfGroup}>
+        <Button type="primary" className="btn-add" size={'large'} onClick={handleAddTeam} disabled={addCount >= 32 || potOfTeams.length === numberOfGroup}>
             ADD {pot.code.toUpperCase()} POT
-        </button>
+        </Button>
     );
 };
 
