@@ -7,6 +7,7 @@ import {RootState} from '../store';
 
 const TeamSelect = () => {
     const teams: Teams = useSelector((state: RootState) => state.teamReducer);
+    const continentLimit = useSelector((state: RootState) => state.continentReducer);
     const [continent, setContinent] = useState(continents[0].code);
     const [team, setTeam] = useState(teams[0]);
 
@@ -46,7 +47,7 @@ const TeamSelect = () => {
                 <label htmlFor="country">
                     <strong>Country</strong>
                 </label>
-                <select id="country" onChange={handleChangeTeam}>
+                <select id="country" onChange={handleChangeTeam} disabled={continentLimit[continent] < 1}>
                     {teams
                         .filter((team) => team.continent === continent)
                         .map((team) => {

@@ -5,6 +5,7 @@ import {Team} from '../types';
 import {deleteTeamFromPot} from '../actions/pots';
 import {groupNames} from '../constants';
 import {addTeamToGroup} from '../actions/groups';
+import {decreaseContinent} from '../actions/continents';
 
 const ButtonAddTeams = () => {
     const pots = useSelector((state: RootState) => state.potReducer);
@@ -21,6 +22,7 @@ const ButtonAddTeams = () => {
             const isAddPossible = team.continent === 'uefa' ? sameContinentLength < 2 : sameContinentLength < 1;
 
             if (isAddPossible && targetGroup.length < pots.currentPot.maxOfGroupTeams) {
+                dispatch(decreaseContinent(team.continent));
                 dispatch(addTeamToGroup({team, group: groupName}));
                 dispatch(deleteTeamFromPot(index));
                 break;
