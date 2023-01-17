@@ -1,4 +1,5 @@
 import React from 'react';
+import {Flex, Box, Image} from '@chakra-ui/react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
 import {Team} from '../types';
@@ -31,19 +32,17 @@ const ButtonAddTeams = () => {
     };
 
     return (
-        <section>
-            <ul className="button-wrap">
-                {pots.teams.map((team: Team, index: number) => {
-                    return (
-                        <li key={team.code}>
-                            <button type="button" onClick={handleAddGroup.bind(null, index)}>
-                                <img src={require('../assets/ball.png')} alt="add team button" />
-                            </button>
-                        </li>
-                    );
-                })}
-            </ul>
-        </section>
+        <Flex mt={'24px'}>
+            {pots.teams.map((team: Team, index: number) => {
+                return (
+                    <Box key={team.code} _notFirst={{ml: '8px'}}>
+                        <button type="button" onClick={handleAddGroup.bind(null, index)}>
+                            <Image src={require('../assets/ball.png')} alt={'add-team-button'} rounded={'full'} boxSize={'24px'} border={'2px'} borderColor={'draw.main'} />
+                        </button>
+                    </Box>
+                );
+            })}
+        </Flex>
     );
 };
 

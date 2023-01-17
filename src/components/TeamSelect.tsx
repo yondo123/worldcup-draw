@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Box, Select, Text} from '@chakra-ui/react';
 import {continents} from '../constants';
 import {Continent, Team, Teams} from '../types';
 import ButtonAddPot from './ButtonAddPot';
@@ -28,12 +29,12 @@ const TeamSelect = () => {
     };
 
     return (
-        <section className="filter">
-            <div className="select-wrap">
-                <label htmlFor="country">
-                    <strong>Continent</strong>
-                </label>
-                <select id="country" onChange={handleChangeContinent}>
+        <Box>
+            <Box mt={'8px'}>
+                <Text size={'lg'} as={'b'} color={'draw.font'}>
+                    Continent
+                </Text>
+                <Select size={'md'} onChange={handleChangeContinent}>
                     {continents.map((continent) => {
                         return (
                             <option key={continent.code} value={continent.code}>
@@ -41,13 +42,13 @@ const TeamSelect = () => {
                             </option>
                         );
                     })}
-                </select>
-            </div>
-            <div className="select-wrap">
-                <label htmlFor="country">
-                    <strong>Country</strong>
-                </label>
-                <select id="country" onChange={handleChangeTeam} disabled={continentLimit[continent] < 1}>
+                </Select>
+            </Box>
+            <Box mt={'8px'}>
+                <Text size={'lg'} as={'b'} color={'draw.font'}>
+                    Country
+                </Text>
+                <Select id={'country'} onChange={handleChangeTeam} disabled={continentLimit[continent] < 1}>
                     {teams
                         .filter((team) => team.continent === continent)
                         .map((team) => {
@@ -57,10 +58,10 @@ const TeamSelect = () => {
                                 </option>
                             );
                         })}
-                </select>
-            </div>
+                </Select>
+            </Box>
             <ButtonAddPot selectedTeam={team} continent={continent} />
-        </section>
+        </Box>
     );
 };
 

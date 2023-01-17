@@ -1,4 +1,5 @@
 import React, {useCallback, useState, useEffect} from 'react';
+import {Button} from '@chakra-ui/react';
 import {Continent, Team} from '../types';
 import {removeTeam} from '../actions/teams';
 import {useSelector, useDispatch} from 'react-redux';
@@ -46,9 +47,9 @@ const ButtonAddPot = (props: PropsType) => {
     }, [props.selectedTeam]);
 
     return (
-        <button type="button" className="btn-add" onClick={handleAddTeam} disabled={addCount >= 32 || potOfTeams.length === numberOfGroup}>
+        <Button className="btn-add" mt={'24px'} colorScheme="twitter" width="100%" onClick={handleAddTeam} isDisabled={addCount >= 32 || potOfTeams.length === numberOfGroup}>
             ADD {pot.code.toUpperCase()} POT
-        </button>
+        </Button>
     );
 };
 
