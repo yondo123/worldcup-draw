@@ -1,11 +1,10 @@
 import React from 'react';
+import {Typography} from '@mui/material';
 
 const Header = () => {
     return (
         <header>
-            <a href="">
-                <h1>Worldcup Draw</h1>
-            </a>
+            <Typography variant="h4">Worldcup Draw</Typography>
         </header>
     );
 };

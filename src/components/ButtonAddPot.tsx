@@ -1,4 +1,5 @@
 import React, {useCallback, useState, useEffect} from 'react';
+import {Button, Box} from '@mui/material';
 import {Continent, Team} from '../types';
 import {removeTeam} from '../actions/teams';
 import {useSelector, useDispatch} from 'react-redux';
@@ -46,9 +47,11 @@ const ButtonAddPot = (props: PropsType) => {
     }, [props.selectedTeam]);
 
     return (
-        <button type="button" className="btn-add" onClick={handleAddTeam} disabled={addCount >= 32 || potOfTeams.length === numberOfGroup}>
-            ADD {pot.code.toUpperCase()} POT
-        </button>
+        <Box textAlign="center">
+            <Button variant="contained" size="large" sx={{mt: '24px'}} onClick={handleAddTeam} disabled={addCount >= 32 || potOfTeams.length === numberOfGroup}>
+                ADD {pot.code.toUpperCase()} POT
+            </Button>
+        </Box>
     );
 };
 

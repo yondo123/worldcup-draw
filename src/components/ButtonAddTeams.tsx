@@ -1,4 +1,5 @@
 import React from 'react';
+import {Box, Stack, Button, Avatar} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
 import {Team} from '../types';
@@ -32,17 +33,20 @@ const ButtonAddTeams = () => {
 
     return (
         <section>
-            <ul className="button-wrap">
-                {pots.teams.map((team: Team, index: number) => {
-                    return (
-                        <li key={team.code}>
-                            <button type="button" onClick={handleAddGroup.bind(null, index)}>
-                                <img src={require('../assets/ball.png')} alt="add team button" />
-                            </button>
-                        </li>
-                    );
-                })}
-            </ul>
+            <Box sx={{mt: '24px'}} textAlign="center">
+                <Stack direction="row" spacing={2}>
+                    {pots.teams.map((team: Team, index: number) => {
+                        return (
+                            <Box key={team.code} style={{width: '24px', height: '24px'}}>
+                                <Button
+                                    startIcon={<Avatar sx={{width: '24px', height: '24px', border: `2px solid #1dd1a1`}} src={require('../assets/ball.png')} />}
+                                    onClick={handleAddGroup.bind(null, index)}
+                                ></Button>
+                            </Box>
+                        );
+                    })}
+                </Stack>
+            </Box>
         </section>
     );
 };
