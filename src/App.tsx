@@ -5,7 +5,7 @@ import Groups from './components/Groups';
 
 function App() {
     return (
-        <div className="App">
+        <div className="bg-gray-100 py-0 px-4">
             <Header />
             <TeamSelect />
             <ButtonAddTeams />

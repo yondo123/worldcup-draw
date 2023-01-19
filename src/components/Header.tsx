@@ -2,10 +2,8 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <header>
-            <a href="">
-                <h1>Worldcup Draw</h1>
-            </a>
+        <header className="py-2">
+            <h1 className="text-gray-800 text-2xl">Worldcup Draw</h1>
         </header>
     );
 };

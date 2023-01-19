@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import {Listbox} from '@headlessui/react';
+import {CheckIcon} from '@heroicons/react/20/solid';
 import {continents} from '../constants';
 import {Continent, Team, Teams} from '../types';
 import ButtonAddPot from './ButtonAddPot';
@@ -29,20 +31,38 @@ const TeamSelect = () => {
 
     return (
         <section className="filter">
-            <div className="select-wrap">
-                <label htmlFor="country">
-                    <strong>Continent</strong>
-                </label>
-                <select id="country" onChange={handleChangeContinent}>
+            <Listbox value={continent}>
+                <Listbox.Label>Continent</Listbox.Label>
+                <Listbox.Button className=" cursor-default rounded-lg bg-white py-2 px-3 pr-10">{continent}</Listbox.Button>
+                <Listbox.Options>
                     {continents.map((continent) => {
                         return (
-                            <option key={continent.code} value={continent.code}>
-                                {continent.name} ({continent.code.toUpperCase()})
-                            </option>
+                            <Listbox.Option key={continent.code} value={continent.code} className="w-40">
+                                {({active, selected}) => (
+                                    <li className={`${active ? 'bg-blue-500 text-white' : 'bg-white text-black'} p-1 `}>
+                                        {selected && <CheckIcon className="w-5 h-5" />}
+                                        {continent.name}({continent.code.toUpperCase()})
+                                    </li>
+                                )}
+                            </Listbox.Option>
                         );
                     })}
-                </select>
-            </div>
+                </Listbox.Options>
+            </Listbox>
+            {/*<div className="select-wrap">*/}
+            {/*    <label htmlFor="country">*/}
+            {/*        <strong>Continent</strong>*/}
+            {/*    </label>*/}
+            {/*    <select id="country" onChange={handleChangeContinent}>*/}
+            {/*        {continents.map((continent) => {*/}
+            {/*            return (*/}
+            {/*                <option key={continent.code} value={continent.code}>*/}
+            {/*                    {continent.name} ({continent.code.toUpperCase()})*/}
+            {/*                </option>*/}
+            {/*            );*/}
+            {/*        })}*/}
+            {/*    </select>*/}
+            {/*</div>*/}
             <div className="select-wrap">
                 <label htmlFor="country">
                     <strong>Country</strong>
