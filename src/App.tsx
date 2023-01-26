@@ -1,13 +1,13 @@
 import Header from './components/Header';
-import TeamSelect from './components/TeamSelect';
 import ButtonAddTeams from './components/ButtonAddTeams';
 import Groups from './components/Groups';
+import SelectWrap from './components/TeamSelect';
 
 function App() {
     return (
         <div className="App">
             <Header />
-            <TeamSelect />
+            <SelectWrap />
             <ButtonAddTeams />
             <main>
                 <Groups />

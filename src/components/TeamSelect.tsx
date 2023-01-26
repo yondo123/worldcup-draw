@@ -4,8 +4,9 @@ import {Continent, Team, Teams} from '../types';
 import ButtonAddPot from './ButtonAddPot';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
+import SelectTeam from './Select/SelectTeam';
 
-const TeamSelect = () => {
+const SelectWrap = () => {
     const teams: Teams = useSelector((state: RootState) => state.teamReducer);
     const continentLimit = useSelector((state: RootState) => state.continentReducer);
     const [continent, setContinent] = useState(continents[0].code);
@@ -43,25 +44,10 @@ const TeamSelect = () => {
                     })}
                 </select>
             </div>
-            <div className="select-wrap">
-                <label htmlFor="country">
-                    <strong>Country</strong>
-                </label>
-                <select id="country" onChange={handleChangeTeam} disabled={continentLimit[continent] < 1}>
-                    {teams
-                        .filter((team) => team.continent === continent)
-                        .map((team) => {
-                            return (
-                                <option key={team.code} value={team.code}>
-                                    {team.name}
-                                </option>
-                            );
-                        })}
-                </select>
-            </div>
+            <SelectTeam />
             <ButtonAddPot selectedTeam={team} continent={continent} />
         </section>
     );
 };
 
-export default TeamSelect;
+export default SelectWrap;
