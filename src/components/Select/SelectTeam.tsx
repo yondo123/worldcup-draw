@@ -1,19 +1,8 @@
-import {continents} from '../../constants';
-import React, {useState} from 'react';
-import {Continent, Team, Teams} from '../../types';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../store';
+import React from 'react';
+import useSelect from './useSelect';
 
 const SelectTeam = () => {
-    const continentLimit = useSelector((state: RootState) => state.continentReducer);
-    const teams: Teams = useSelector((state: RootState) => state.teamReducer);
-    const [continent, setContinent] = useState(continents[0].code);
-    const [team, setTeam] = useState(teams[0]);
-    const handleChangeTeam = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const {value} = e.target;
-        const selectTeam = teams.find((item) => item.code === value);
-        setTeam(selectTeam as Team);
-    };
+    const {handleChangeTeam, continentLimit, continent, teams} = useSelect();
 
     return (
         <div className="select-wrap">

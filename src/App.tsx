@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import ButtonAddTeams from './components/ButtonAddTeams';
 import Groups from './components/Groups';
-import SelectWrap from './components/TeamSelect';
+import SelectWrap from './components/Select/SelectWrap';
 
 function App() {
     return (
